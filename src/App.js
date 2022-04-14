@@ -1,16 +1,28 @@
-import React, { Component } from 'react';
-import { Products, Navbar } from './components'
+import React, { useState, useEffect } from 'react';
 
-class App extends Component {
-    state = {  } 
-    render() { 
-        return (
-            <div>
-                <Navbar/>
-                <Products/>
-            </div>
-        );
+import { Products, Navbar } from './components';
+import { commerce } from './lib/commerce';
+
+const App = () => {
+
+    const [products, setProducts] = useState([]);
+    
+    const fetchProducts = async () => {
+        const { data } = await commerce.products.list();
+    
+        setProducts(data);
     }
+    useEffect(() => {
+        fetchProducts();
+        
+      }, []);
+    
+    return ( 
+        <div>
+            <Navbar/>
+            <Products products={products}/>
+        </div>
+         );
 }
  
 export default App;

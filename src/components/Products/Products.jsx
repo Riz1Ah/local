@@ -4,12 +4,9 @@ import {Grid}  from '@material-ui/core';
 import Product from './Product/Product';
 import useStyles from './styles';
 
-const products = [
-    { id:1, name: "Tea", desc: "Assam Tea", price: "Rs. 99", image: "https://media.istockphoto.com/photos/black-tea-in-a-cup-picture-id475614605?k=20&m=475614605&s=612x612&w=0&h=QxyE7nnKJi2m9xoOedKiuLmblGT-87daZPkvHnPP9eY="},
-    { id:1, name: "Macbook", desc: "Apple Macbook Air M1", price: "Rs. 999", image: "https://images.indulgexpress.com/uploads/user/imagelibrary/2020/12/30/original/MacBookAirM1.jpg"},
-];
 
-const Products = () => {
+
+const Products = ({ products }) => {
 
     const classes = useStyles();
     return(
