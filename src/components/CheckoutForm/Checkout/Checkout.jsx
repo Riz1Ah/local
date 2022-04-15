@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { CssBaseline, Paper, Stepper, Step, StepLabel, Typography, CircularProgress, Divider, Button } from '@material-ui/core';
-import { Link, useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import { commerce } from '../../../lib/commerce';
 import AddressForm from '../AddressForm';
@@ -59,11 +59,31 @@ const Checkout = ({ cart, onCaptureCheckout, order, error }) => {
 
   if (error) {
     Confirmation = () => (
-      <>
-        <Typography variant="h5">Error: {error}</Typography>
-        <br />
-        <Button component={Link} variant="outlined" type="button" to="/">Back to home</Button>
-      </>
+      // Since we cannot integrate payment systems with spending money, doing this
+      //============================================================================
+      order.customer ? (
+        <>
+          <div>
+            <Typography variant="h5">Thank you for your purchase, {order.customer.firstname}!</Typography>
+            <Divider className={classes.divider} />
+            {/* <Typography variant="subtitle2">Order ref: {order.customer_reference}</Typography> */}
+            <Typography variant="subtitle2">Order ref: xxxx</Typography>
+          </div>
+          <br />
+          <Button component={Link} variant="outlined" type="button" to="/">Back to home</Button>
+        </>
+      ) : (
+        <div className={classes.spinner}>
+          <CircularProgress />
+        </div>
+      )
+      //============================================================================
+
+      // <>
+      //   <Typography variant="h5">Error: {error}</Typography>
+      //   <br />
+      //   <Button component={Link} variant="outlined" type="button" to="/">Back to home</Button>
+      // </>
     );
   }
 

@@ -59,6 +59,12 @@ const App = () => {
           refreshCart();
         } catch (error) {
           setErrorMessage(error.data.error.message);
+          // Since we cannot integrate payment systems with spending money, doing this
+          //============================================================================
+          setOrder(newOrder);
+    
+          refreshCart();
+          //============================================================================
         }
       };
     
